@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carrito de Compras - Rosema Moda Familiar</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <link rel="stylesheet" href="style-enhanced.css">
+  
+</head>
+
+<body>
+   <header class="bg-[#222] text-white px-4 py-4 min-h-[8px] relative overflow-visible">
+     
+   </header>
+
+  <!-- Top Navbar -->
+  <header class="bg-[#d63629] text-white px-4 py-4 min-h-[120px] relative overflow-visible">
+
+  <div class="flex items-center justify-between">
+    
+    <!-- Menú izquierdo -->
+    <div class="flex items-center space-x-4">
+      <!-- Botón menú visible solo en móvil -->
+      <button id="menu-toggle" aria-label="Menu" class="sm:hidden text-white text-2xl focus:outline-none">☰</button>
+
+      <!-- Links visibles desde sm -->
+      <div class="hidden sm:flex items-center space-x-2">
+        <a href="index.html" class="hover:text-[#fcdede]" tabindex="0">Inicio</a>
+        <span>|</span>
+        <a href="#" class="hover:text-[#fcdede]" tabindex="0">Nosotros</a>
+        <span>|</span>
+        <a href="#" class="hover:text-[#fcdede]" tabindex="0">Pedidos</a>
+      </div>
+    </div>
+
+    <!-- Logo centrado absoluto -->
+    <div class="flex justify-center absolute top-1 left-1/2 -translate-x-1/2 z-10">
+      <img src="assets/img/rosemalogysubwhite.png" alt="Logo Rosema moda familiar" class="h-32 w-auto select-none" />
+    </div>
+
+    <!-- Buscador + carrito -->
+    <div class="flex items-center space-x-3">
+      <!-- Buscador completo en pantallas medianas y mayores -->
+      <div class="hidden sm:flex items-center relative">
+        <input type="search" placeholder="Buscar..." aria-label="Buscar productos"
+          class="rounded-full py-2 px-4 pl-10 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#b22a26] w-48" />
+        <svg class="w-5 h-5 text-gray-500 absolute top-2.5 left-3" fill="none" stroke="currentColor" stroke-width="2"
+          viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+      </div>
+
+      <!-- Solo ícono de lupa en mobile -->
+      <button class="sm:hidden focus:outline-none" aria-label="Buscar">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+      </button>
+
+      <!-- Carrito -->
+      <a href="cart.html" aria-label="Carrito de compras" class="text-white hover:text-[#f0eded] focus:outline-none relative">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" />
+          <circle cx="7" cy="21" r="1" />
+          <circle cx="17" cy="21" r="1" />
+        </svg>
+        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Menú colapsable en móviles -->
+<div id="mobile-menu" class="sm:hidden hidden flex-col bg-[#d6342b] text-white px-4 py-2 space-y-2">
+  <a href="index.html" class="block hover:text-[#fcdede]">Inicio</a>
+  <a href="#" class="block hover:text-[#fcdede]">Nosotros</a>
+  <a href="#" class="block hover:text-[#fcdede]">Pedidos</a>
+  <a href="#" class="block hover:text-[#fcdede]">Mujer</a>
+  <a href="#" class="block hover:text-[#fcdede]">Hombre</a>
+  <a href="#" class="block hover:text-[#fcdede]">Niños/Bebés</a>
+  <a href="#" class="block hover:text-[#fcdede]">Calzado</a>
+  <a href="#" class="block hover:text-[#fcdede]">Ropa Interior</a>
+  <a href="#" class="block hover:text-[#fcdede]">Accesorios</a>
+</div>
+
+<!-- Main Content -->
+<main class="container mx-auto px-4 py-8 min-h-screen">
+  <div class="max-w-6xl mx-auto">
+    
+    <!-- Page Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">Carrito de Compras</h1>
+      <nav class="text-sm text-gray-600">
+        <a href="index.html" class="hover:text-[#d63629]">Inicio</a>
+        <span class="mx-2">/</span>
+        <span class="text-gray-900">Carrito</span>
+      </nav>
+    </div>
+
+    <!-- Cart Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Cart Items -->
+      <div class="lg:col-span-2">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+          <div class="p-6 border-b border-gray-200">
+            <h2 class="text-xl font-semibold text-gray-900">Productos en tu carrito</h2>
+          </div>
+          
+          <!-- Empty Cart Message -->
+          <div id="empty-cart" class="p-8 text-center hidden">
+            <div class="text-gray-400 mb-4">
+              <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 5M7 13l-1.5-5M20 13v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6m16 0V9a2 2 0 00-2-2H8a2 2 0 00-2-2H4a2 2 0 00-2-2v0a2 2 0 012-2h16.5"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">Tu carrito está vacío</h3>
+            <p class="text-gray-600 mb-4">Agrega algunos productos para comenzar tu compra</p>
+            <a href="index.html" class="inline-block bg-[#d63629] text-white px-6 py-2 rounded-lg hover:bg-[#b22a26] transition-colors">
+              Continuar Comprando
+            </a>
+          </div>
+
+          <!-- Cart Items List -->
+          <div id="cart-items" class="divide-y divide-gray-200">
+            <!-- Cart items will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="lg:col-span-1">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 sticky top-4">
+          <div class="p-6 border-b border-gray-200">
+            <h2 class="text-xl font-semibold text-gray-900">Resumen del Pedido</h2>
+          </div>
+          
+          <div class="p-6">
+            <div class="space-y-4">
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-600">Subtotal (<span id="total-items">0</span> productos)</span>
+                <span class="font-medium" id="subtotal">$ 0</span>
+              </div>
+              
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-600">Envío</span>
+                <span class="font-medium text-green-600">Gratis</span>
+              </div>
+              
+              <div class="border-t border-gray-200 pt-4">
+                <div class="flex justify-between text-lg font-semibold">
+                  <span>Total</span>
+                  <span id="total-price">$ 0</span>
+                </div>
+              </div>
+            </div>
+            
+            <button id="checkout-btn" class="w-full mt-6 bg-[#d63629] text-white py-3 px-4 rounded-lg font-semibold hover:bg-[#b22a26] transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed" disabled>
+              Proceder al Pago
+            </button>
+            
+            <a href="index.html" class="block text-center mt-4 text-[#d63629] hover:text-[#b22a26] font-medium">
+              Continuar Comprando
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="py-12">
+  <div class="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 gap-8 text-gray-300">
+    <!-- Left block: Payment and Shipping -->
+    <div>
+      <h3 class="uppercase font-semibold mb-5 tracking-wide text-gray-400">Medios de pago</h3>
+      <div class="flex items-center space-x-4 mb-6">
+        <img src="assets/icons/mercado-pago-logo.svg" class="h-10 w-auto object-contain" />
+        <button class="border border-white py-1 px-4 text-white text-xs uppercase tracking-wider hover:bg-white hover:text-gray-900 transition rounded">Efectivo</button>
+      </div>
+      <h3 class="uppercase font-semibold mb-3 tracking-wide text-gray-400">Medios de envío</h3>
+      <div class="mb-6">
+        <img src="assets/icons/idIj9XpMuz_logos.png" class="h-16 w-auto object-contain"  />
+      </div>
+      <p class="text-x text-gray-400">
+        Horarios: Lunes a Sabado
+        <br />
+            Mañana      9:00am a 1:00pm
+        <br />
+            Tarde          5:00pm a 9:00pm
+      </p>
+    </div>
+    <!-- Right block: Social and Contact -->
+    <div>
+      <h3 class="uppercase font-semibold mb-5 tracking-wide text-gray-400">Nuestras Redes Sociales</h3>
+      <div class="footer-social-icons flex space-x-6 mb-6 text-white">
+              <a href="#/"><span class="icons-2" style="color:white"><i class="fab fa-facebook text-2xl" aria-hidden="true"></i></span></a>
+              <a href="#/"><span class="icons-1" style="color:white"><i class="fab fa-tiktok text-2xl" aria-hidden="true"></i></span></a>
+              <a href="#/"><span class="icons" style="color:white"><i class="fab fa-instagram text-2xl" aria-hidden="true"></i></span></a>
+      </div>
+      <hr class="border-gray-700 mb-6" />
+      <div>
+        <h4 class="uppercase font-semibold mb-3 tracking-wide text-gray-400">Contacto</h4>
+        <p class="flex items-center gap-2 mb-2 text-sm">
+          <p data-aos="fade-up"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp; rosema.ropa@gmail.com</p>
+        </p>
+        <p class="flex items-center gap-2 mb-2 text-sm">
+          <p data-aos="fade-up"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp; +54 9 260 4381502</p>
+        </p>
+        <p class="flex items-center gap-2 font-semibold text-sm">
+          <p data-aos="fade-up"><i class="fa fa-home" aria-hidden="true" style="font-size:20px;"></i>&nbsp; Salto de las Rosas, Mendoza AR </p>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="mt-10 pt-5 border-t border-gray-600 text-center text-gray-400 text-xs select-none">
+    © 2025 Rosema - Todos los derechos reservados.
+  </div>
+</footer>
+
+<!-- WhatsApp floating icon -->
+<a href="https://wa.me/5492604381502" target="_blank" rel="noopener noreferrer" aria-label="Abrir chat de WhatsApp" class="whatsapp-float" >
+  <svg fill="white" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="w-6 h-6">
+    <path d="M20.52 3.48A11.86 11.86 0 0012 0C5.37 0 0 5.37 0 12c0 2.11.57 4.07 1.56 5.78L0 24l6.47-1.54A11.87 11.87 0 0012 24c6.63 0 12-5.37 12-12a11.86 11.86 0 00-3.48-8.52zM12 21.9a9.91 9.91 0 01-5.12-1.4l-.37-.22-3.84 .91.81-3.75-.24-.37a9.91 9.91 0 1111.67 3.63zm5.36-7.72c-.3-.15-1.76-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.34.22-.64.07-.3-.15-1.26-.47-2.4-1.5-.89-.8-1.49-1.79-1.66-2.09-.17-.3-.02-.46.13-.61.14-.14.3-.37.45-.56.15-.2.2-.33.3-.55.1-.22.05-.42-.02-.58-.07-.15-.68-1.63-.93-2.24-.24-.59-.49-.51-.68-.52-.18 0-.39 0-.6 0-.2 0-.58.08-.88.42-.3.34-1.14 1.12-1.14 2.72s1.17 3.16 1.33 3.38c.16.22 2.29 3.5 5.55 4.91.78.34 1.39.54 1.87.69.79.25 1.51.21 2.08.13.63-.1 1.94-.79 2.21-1.56.27-.76.27-1.41.19-1.56-.07-.15-.27-.24-.57-.39z"/>
+  </svg>
+</a>
+
+<script src="cart.js"></script>
+
+</body>
+</html>
